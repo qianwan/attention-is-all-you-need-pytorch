@@ -6,6 +6,7 @@ from transformer.Modules import ScaledDotProductAttention
 
 __author__ = "Yu-Hsiang Huang"
 
+
 class MultiHeadAttention(nn.Module):
     ''' Multi-Head Attention module '''
 
@@ -30,7 +31,6 @@ class MultiHeadAttention(nn.Module):
         nn.init.xavier_normal_(self.fc.weight)
 
         self.dropout = nn.Dropout(dropout)
-
 
     def forward(self, q, k, v, mask=None):
 
@@ -60,6 +60,7 @@ class MultiHeadAttention(nn.Module):
         output = self.layer_norm(output + residual)
 
         return output, attn
+
 
 class PositionwiseFeedForward(nn.Module):
     ''' A two-feed-forward-layer module '''

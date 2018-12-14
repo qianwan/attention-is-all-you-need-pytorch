@@ -16,6 +16,7 @@ from dataset import TranslationDataset, paired_collate_fn
 from transformer.Models import Transformer
 from transformer.Optim import ScheduledOptim
 
+
 def cal_performance(pred, gold, smoothing=False):
     ''' Apply label smoothing if needed '''
 
@@ -92,6 +93,7 @@ def train_epoch(model, training_data, optimizer, device, smoothing):
     accuracy = n_word_correct/n_word_total
     return loss_per_word, accuracy
 
+
 def eval_epoch(model, validation_data, device):
     ''' Epoch operation in evaluation phase '''
 
@@ -125,6 +127,7 @@ def eval_epoch(model, validation_data, device):
     loss_per_word = total_loss/n_word_total
     accuracy = n_word_correct/n_word_total
     return loss_per_word, accuracy
+
 
 def train(model, training_data, validation_data, optimizer, device, opt):
     ''' Start training '''
@@ -188,6 +191,7 @@ def train(model, training_data, validation_data, optimizer, device, opt):
                 log_vf.write('{epoch},{loss: 8.5f},{ppl: 8.5f},{accu:3.3f}\n'.format(
                     epoch=epoch_i, loss=valid_loss,
                     ppl=math.exp(min(valid_loss, 100)), accu=100*valid_accu))
+
 
 def main():
     ''' Main function '''
@@ -261,7 +265,7 @@ def main():
             betas=(0.9, 0.98), eps=1e-09),
         opt.d_model, opt.n_warmup_steps)
 
-    train(transformer, training_data, validation_data, optimizer, device ,opt)
+    train(transformer, training_data, validation_data, optimizer, device, opt)
 
 
 def prepare_dataloaders(data, opt):
